@@ -77,9 +77,7 @@ class SearchWidget extends StatelessWidget implements PreferredSizeWidget {
         child: StreamBuilder<String>(
           stream: bloc.searchQuery,
           builder: (context, snapshot) {
-            TextEditingController controller = _getController(snapshot);
             return TextField(
-              controller: controller,
               autofocus: true,
               decoration: InputDecoration(
                 border: InputBorder.none,
@@ -94,14 +92,5 @@ class SearchWidget extends StatelessWidget implements PreferredSizeWidget {
         ),
       ),
     );
-  }
-
-  TextEditingController _getController(AsyncSnapshot<String> snapshot) {
-    final controller = TextEditingController();
-    controller.value = TextEditingValue(text: snapshot.data ?? '');
-    controller.selection = TextSelection.fromPosition(
-      TextPosition(offset: controller.text?.length ?? 0),
-    );
-    return controller;
   }
 }
